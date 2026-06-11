@@ -114,30 +114,26 @@ SW-Core# show interfaces e2/0 switchport
 ## Despues del ataque
 
 <img width="249" height="190" alt="Captura de pantalla 2026-06-11 092343" src="https://github.com/user-attachments/assets/40b3d580-ddb7-4a4b-9791-b49aa968cecf" />
-```
-```
+
+
 <img width="286" height="218" alt="Captura de pantalla 2026-06-11 092443" src="https://github.com/user-attachments/assets/ff285aa7-6513-4009-926b-a95eae0d7a51" />
 
-```
-```
-<img width="148" height="134" alt="Captura de pantalla 2026-06-11 093311" src="https://github.com/user-attachments/assets/891295c4-bb9d-46d0-bb0e-e30ce3159bef" />
-```
----
-```
-## Contra-medida
 
+<img width="148" height="134" alt="Captura de pantalla 2026-06-11 093311" src="https://github.com/user-attachments/assets/891295c4-bb9d-46d0-bb0e-e30ce3159bef" />
+
+## Contra-medida
 ```
 SW-Core(config)# interface e2/0
 SW-Core(config-if)# switchport mode access
 SW-Core(config-if)# switchport nonegotiate
 ```
+```
+```
 <img width="166" height="152" alt="Captura de pantalla 2026-06-11 093204" src="https://github.com/user-attachments/assets/dbfb537b-589f-4cdb-ab96-e029de111fe8" />
-
----
 
 ## Archivos
 
-```
+`
 dtp-vlan-hopping/
 ├── dtp_vlan_hopping.py
 ├── README.md
