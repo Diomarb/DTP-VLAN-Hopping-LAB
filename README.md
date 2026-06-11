@@ -34,34 +34,64 @@ sudo python3 dtp_vlan_hopping.py
 
 ## Red
 
-Dispositivo	Rol	Sistema Operativo	Interfaces usadas	IP / VLAN
-SW-Core	Switch núcleo / VTP Server	Cisco IOS L2 (IOU)	e0/0, e0/1, e2/0	SVI VLAN10: 10.11.85.1/24
-SW-Access1	Switch acceso / VTP Client	Cisco IOS L2 (IOU)	e0/0	
-Kali Linux	Máquina atacante	Kali Linux	eth0	10.11.85.50/24
-PC3	Host víctima	VPCS	eth0	10.11.85.10/24 — VLAN 10
-PC4	Host víctima	VPCS	eth0	10.11.85.11/24 — VLAN 20
+## Dispositivos
 
-Host	Dirección IP	Máscara de Red	Gateway	VLAN
-SW-Core (SVI)	10.11.85.1	255.255.255.0	—	VLAN 10
-SW-Access1 (SVI)				
-Kali (Atacante)	10.11.85.50	255.255.255.0	10.11.85.1	Nativa / trunk
-PC3	10.11.85.10	255.255.255.0	10.11.85.1	VLAN 10
-PC4	10.11.85.11	255.255.255.0	10.11.85.1	VLAN 20
+| Dispositivo | Rol | Sistema Operativo | Interfaces usadas | IP / VLAN |
+|------------|-----|------------------|------------------|-----------|
+| SW-Core | Switch núcleo / VTP Server | Cisco IOS L2 (IOU) | e0/0, e0/1, e2/0 | SVI VLAN10: 10.11.85.1/24 |
+| SW-Access1 | Switch de acceso / VTP Client | Cisco IOS L2 (IOU) | e0/0 | - |
+| Kali Linux | Máquina atacante | Kali Linux | eth0 | 10.11.85.50/24 |
+| PC3 | Host víctima | VPCS | eth0 | 10.11.85.10/24 — VLAN 10 |
+| PC4 | Host víctima | VPCS | eth0 | 10.11.85.11/24 — VLAN 20 |
 
-VLAN ID	Nombre	Hosts asignados	Rango de IPs
-VLAN 10	VENTAS	PC3	10.11.85.10, 10.11.85.12
-VLAN 20	RRHH	PC4	10.11.85.11, 10.11.85.13
+---
 
+## Direccionamiento IP
 
-### Parámetros
-Parámetro Corto	Parámetro Largo	Tipo de Dato	Valor por Defecto
--i	--iface	Texto	"eth0"
--n	--count	Número entero	5
--t	--intervalo	Número decimal	1.0
-—	--dst-ip	Texto	"10.0.20.10"
-—	--solo-dtp	Booleano (Bandera)	False
-—	--solo-sniff	Booleano (Bandera)	False
-—	--sniff-timeout	Número entero	15
+| Host | Dirección IP | Máscara de Red | Gateway | VLAN |
+|------|-------------|---------------|---------|------|
+| SW-Core (SVI) | 10.11.85.1 | 255.255.255.0 | - | VLAN 10 |
+| SW-Access1 (SVI) | - | - | - | - |
+| Kali (Atacante) | 10.11.85.50 | 255.255.255.0 | 10.11.85.1 | Nativa / Trunk |
+| PC3 | 10.11.85.10 | 255.255.255.0 | 10.11.85.1 | VLAN 10 |
+| PC4 | 10.11.85.11 | 255.255.255.0 | 10.11.85.1 | VLAN 20 |
+
+---
+
+## Configuración de VLANs
+
+| VLAN ID | Nombre | Hosts asignados | Rango de IPs |
+|---------|---------|----------------|--------------|
+| 10 | VENTAS | PC3 | 10.11.85.10, 10.11.85.12 |
+| 20 | RRHH | PC4 | 10.11.85.11, 10.11.85.13 |
+
+---
+
+## Parámetros del Script
+
+| Parámetro Corto | Parámetro Largo | Tipo de Dato | Valor por Defecto |
+|----------------|----------------|--------------|------------------|
+| `-i` | `--iface` | Texto | `eth0` |
+| `-n` | `--count` | Número entero | `5` |
+| `-t` | `--intervalo` | Número decimal | `1.0` |
+| - | `--dst-ip` | Texto | `10.0.20.10` |
+| - | `--solo-dtp` | Booleano (Bandera) | `False` |
+| - | `--solo-sniff` | Booleano (Bandera) | `False` |
+| - | `--sniff-timeout` | Número entero | `15` |
+
+---
+
+## Descripción de Parámetros
+
+| Parámetro | Descripción |
+|-----------|-------------|
+| `--iface` | Define la interfaz de red de Kali conectada al switch. |
+| `--count` | Cantidad de paquetes DTP enviados durante la negociación. |
+| `--intervalo` | Tiempo de espera entre cada paquete DTP enviado. |
+| `--dst-ip` | Dirección IP del host objetivo. |
+| `--solo-dtp` | Ejecuta únicamente la negociación DTP y termina. |
+| `--solo-sniff` | Solo captura tráfico etiquetado sin realizar ataques. |
+| `--sniff-timeout` | Tiempo máximo de captura de tráfico en segundos. |
 
 ---
 
@@ -70,7 +100,6 @@ Parámetro Corto	Parámetro Largo	Tipo de Dato	Valor por Defecto
 ```
 ```
 <img width="403" height="279" alt="image" src="https://github.com/user-attachments/assets/91e50645-4c7f-4252-acab-d8ad5888197e" />
-
 
 ---
 
@@ -86,7 +115,9 @@ SW-Core# show interfaces e2/0 switchport
 
 <img width="249" height="190" alt="Captura de pantalla 2026-06-11 092343" src="https://github.com/user-attachments/assets/40b3d580-ddb7-4a4b-9791-b49aa968cecf" />
 
+
 <img width="286" height="218" alt="Captura de pantalla 2026-06-11 092443" src="https://github.com/user-attachments/assets/ff285aa7-6513-4009-926b-a95eae0d7a51" />
+
 
 <img width="148" height="134" alt="Captura de pantalla 2026-06-11 093311" src="https://github.com/user-attachments/assets/891295c4-bb9d-46d0-bb0e-e30ce3159bef" />
 
