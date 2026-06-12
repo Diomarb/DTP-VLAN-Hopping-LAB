@@ -274,12 +274,7 @@ def main():
         cleanup(args.iface)
  
     print("\n" + "="*60)
-    print("  CONTRAMEDIDAS — Aplica en el switch para protegerte:")
-    print("="*60)
-    print("  switchport mode access          ! Fijar modo acceso")
-    print("  switchport nonegotiate          ! Deshabilitar DTP")
-    print("  switchport access vlan <ID>     ! VLAN explícita")
-    print("="*60 + "\n")
+   
  
  
 if __name__ == "__main__":
