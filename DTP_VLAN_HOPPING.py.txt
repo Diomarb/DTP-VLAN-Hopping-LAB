@@ -27,8 +27,8 @@ DEFAULT_IFACE  = "eth0"
 DTP_MULTICAST  = "01:00:0c:cc:cc:cc"   # MAC multicast Cisco DTP
 VLAN_NATIVA    = 10                     # VLAN del puerto de acceso del atacante
 VLAN_OBJETIVO  = 20                     # VLAN destino (salto)
-IP_ATACANTE    = "10.0.10.100"
-IP_SERVIDOR    = "10.0.20.10"          # Objetivo en VLAN 20
+IP_ATACANTE    = "10.11.85.50"
+IP_SERVIDOR    = "10.11.85.10"          # Objetivo en VLAN 20
  
  
 # ─────────────────────────────────────────────
@@ -216,9 +216,7 @@ def cleanup(iface: str):
 def banner():
     print("""
 ╔══════════════════════════════════════════════════════════════╗
-║   DTP VLAN Hopping — Lab educativo de Seguridad en Redes    ║
-║   Técnica: DTP Negotiate + Double Tagging 802.1Q            ║
-║   Uso: solo en entorno aislado (GNS3 / lab propio)          ║
+║   DTP VLAN Hopping                                           ║
 ╚══════════════════════════════════════════════════════════════╝
 """)
  
